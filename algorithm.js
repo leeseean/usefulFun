@@ -728,9 +728,9 @@ function Levenshtein_Distance_Percent(s, t) {
 function checkShunzi(arr) {
     arr = arr.sort();
     if (arr.indexOf(0) != -1 && arr.indexOf(9) != -1) {
-        let arr0 = []; //0这边的数组比如[0,1,2,3,8,9]->[0,1,2,3]
+        let arr0 = []; //0这边的数组比如[0,1,2,3,8,9]->[1,2,3]
         let arr9 = []; //9这边的数组比如[0,1,2,3,7,8,9]->[7,8]
-        //只要arr0和arr9是顺子，那么数组arr就是顺子
+        //只要arr0和arr9是顺子并且长度总和等于arr.length-2，或者arr9的长度等于arr.length-1那么数组arr就是顺子
         for (let i = 0; i < arr.length - 2; i++) {
             let j = i + 1;
             if (arr[j] - arr[i] == 1) {
@@ -747,7 +747,7 @@ function checkShunzi(arr) {
                 break;
             }
         }
-        return isShunNum(arr0)&&isShunNum(arr9);
+        return isShunNum(arr0) && isShunNum(arr9) && ((arr.length - 2 - arr0.length == arr9.length) || arr9.length == arr.length - 1); //arr0.length==arr.length-1,[0,1,2,3,4,5,6,7,8,9]的情况
     }
 
     function isShunNum(arr) {
