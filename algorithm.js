@@ -724,3 +724,37 @@ function Levenshtein_Distance_Percent(s, t) {
   return (1 - d / l).toFixed(4);
 
 }
+//顺子号:1,2,3,4,5或者9,0,1,2,3,4或者7,8,9,0,1
+function checkShunzi(arr) {
+    arr = arr.sort();
+    if (arr.indexOf(0) != -1 && arr.indexOf(9) != -1) {
+        let arr0 = []; //0这边的数组比如[0,1,2,3,8,9]->[0,1,2,3]
+        let arr9 = []; //9这边的数组比如[0,1,2,3,7,8,9]->[7,8]
+        //只要arr0和arr9是顺子，那么数组arr就是顺子
+        for (let i = 0; i < arr.length - 2; i++) {
+            let j = i + 1;
+            if (arr[j] - arr[i] == 1) {
+                arr0.push(arr[j]);
+            } else {
+                break;
+            }
+        }
+        for (let i = arr.length - 1; i > -1; i--) {
+            let j = i - 1;
+            if (arr[i] - arr[j] == 1) {
+                arr9.unshift(arr[j]);
+            } else {
+                break;
+            }
+        }
+        return isShunNum(arr0)&&isShunNum(arr9);
+    }
+
+    function isShunNum(arr) {
+        return arr.every(function (item, index, arr) {
+            return 0 === index || (Number(item) + 10 - 1) % 10 == arr[index - 1];
+        })
+    }
+
+    return isShunNum(arr);
+}
