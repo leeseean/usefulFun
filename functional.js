@@ -1,7 +1,12 @@
 //获取字符串长度，汉字算两个字符
-function getStrLength(str){
-    return str.replace(/[\u0391-\uFFE5]/g,"aa").length;  //先把中文替换成两个字节的英文，在计算长度
+let Orange = Orange || {};
+Orange.getStrLength = function(str) {
+    return str.replace(/[\u0391-\uFFE5]/g, "aa").length; //先把中文替换成两个字节的英文，在计算长度
 }
+//
+Orange.now = Date.now || function () {
+    return new Date().getTime();
+};
 //延迟执行函数，多用在输入框或者滚动时
 /**
  * 空闲控制 返回函数连续调用时，空闲时间必须大于或等于 wait，func 才会执行
@@ -11,12 +16,12 @@ function getStrLength(str){
  * @param  {boolean}  immediate   设置为ture时，调用触发于开始边界而不是结束边界
  * @return {function}             返回客户调用函数
  */
-_.debounce = function(func, wait, immediate) {
+Orange.debounce = function (func, wait, immediate) {
     var timeout, args, context, timestamp, result;
 
-    var later = function() {
+    var later = function () {
         // 据上一次触发时间间隔
-        var last = _.now() - timestamp;
+        var last = Orange.now() - timestamp;
 
         // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
         if (last < wait && last > 0) {
@@ -31,10 +36,10 @@ _.debounce = function(func, wait, immediate) {
         }
     };
 
-    return function() {
+    return function () {
         context = this;
         args = arguments;
-        timestamp = _.now();
+        timestamp = Orange.now();
         var callNow = immediate && !timeout;
         // 如果延时不存在，重新设定延时
         if (!timeout) timeout = setTimeout(later, wait);
@@ -55,22 +60,22 @@ _.debounce = function(func, wait, immediate) {
  *                                如果想忽略结尾边界上的调用，传入{trailing: false}
  * @return {function}             返回客户调用函数
  */
-_.throttle = function(func, wait, options) {
+Orange.throttle = function (func, wait, options) {
     var context, args, result;
     var timeout = null;
     // 上次执行时间点
     var previous = 0;
     if (!options) options = {};
     // 延迟执行函数
-    var later = function() {
+    var later = function () {
         // 若设定了开始边界不执行选项，上次执行时间始终为0
-        previous = options.leading === false ? 0 : _.now();
+        previous = options.leading === false ? 0 : Orange.now();
         timeout = null;
         result = func.apply(context, args);
         if (!timeout) context = args = null;
     };
-    return function() {
-        var now = _.now();
+    return function () {
+        var now = Orange.now();
         // 首次执行时，如果设定了开始边界不执行选项，将上次执行时间设定为当前时间。
         if (!previous && options.leading === false) previous = now;
         // 延迟执行时间间隔
@@ -92,7 +97,8 @@ _.throttle = function(func, wait, options) {
         return result;
     };
 };
-_.range = function(start, stop, step) {
+//range(1,4)->[1,2,3,4]
+Orange.range = function (start, stop, step) {
     if (stop == null) {
         stop = start || 0;
         start = 0;
