@@ -130,13 +130,6 @@ function insertSort(arr) {
 }
 
 
-
-
-
-
-
-
-
 /*希尔排序，希尔排序，也称递减增量排序算法具体描述，其实说到底也是插入排序的变种*/
 
 function shellSort(array) {
@@ -210,8 +203,6 @@ function shellSort(array) {
   return array;
 
 }
-
-
 
 /*快速排序，其实说到底快速排序算法就系对冒泡排序的一种改进，采用的就是算法理论中的分治递归的思想，说得明白点，它的做法就是：通过一趟排序将待排序的纪录分割成两部分，其中一部分的纪录值比另外一部分的纪录值要小，就可以继续分别对这两部分纪录进行排序；不段的递归实施上面两个操作，从而实现纪录值的排序。
 
@@ -289,24 +280,6 @@ function bullSort(array) {
 
 }
 
-
-
-/*js递归实现方案*/
-
-
-function factorial(num) {
-
-  if (num <= 1) {
-
-    return 1;
-
-  } else {
-
-    return num * factorial(num - 1);
-
-  }
-
-}
 
 
 /*选择法排序*/
@@ -454,9 +427,7 @@ function moveDown(items, first, last) {
   return items;
 
 }
-
 /**
-
 * 交换数据
 
 * @param items 数组
@@ -468,7 +439,6 @@ function moveDown(items, first, last) {
 * @return 数据交换后的数组
 
 */
-
 function swap(items, index1, index2) {
 
   var tmp = items[index1];
@@ -480,22 +450,10 @@ function swap(items, index1, index2) {
   return items;
 
 }
-
-
-
-
-
-
-
-
-
 /*所谓归并就是将两个或者两个以上的有序表合成一个新的有序表。
-
 递归形式的算法在形式上较为简洁但实用性较差，与快速排序和堆排序相比，归并排序的最大特点是，它是一种稳定的排序方法。
 
 js实现归并：*/
-
-
 function MemeryArray(Arr, n, Brr, m) {
   var i, j, k;
 
@@ -528,13 +486,7 @@ function MemeryArray(Arr, n, Brr, m) {
   return Crr;
 
 }
-
-
-
-
-
 //将有二个有序数列a[first...mid]和a[mid...last]合并。
-
 function mergearray(Arr, first, mid, last, tempArr) {
 
   var i = first,
@@ -594,10 +546,6 @@ function mergesort(Arr, first, last) {
   return Arr;
 
 }
-
-
-
-
 
 
 //求两个字符串的相似度,返回差别字符数,Levenshtein Distance算法实现
@@ -726,35 +674,66 @@ function Levenshtein_Distance_Percent(s, t) {
 }
 //顺子号:1,2,3,4,5或者9,0,1,2,3,4或者7,8,9,0,1
 function checkShunzi(arr) {
-    arr = arr.sort();
-    if (arr.indexOf(0) != -1 && arr.indexOf(9) != -1) {
-        let arr0 = []; //0这边的数组比如[0,1,2,3,8,9]->[1,2,3]
-        let arr9 = []; //9这边的数组比如[0,1,2,3,7,8,9]->[7,8]
-        //只要arr0和arr9是顺子并且长度总和等于arr.length-2，或者arr9的长度等于arr.length-1那么数组arr就是顺子
-        for (let i = 0; i < arr.length - 2; i++) {
-            let j = i + 1;
-            if (arr[j] - arr[i] == 1) {
-                arr0.push(arr[j]);
-            } else {
-                break;
-            }
-        }
-        for (let i = arr.length - 1; i > -1; i--) {
-            let j = i - 1;
-            if (arr[i] - arr[j] == 1) {
-                arr9.unshift(arr[j]);
-            } else {
-                break;
-            }
-        }
-        return isShunNum(arr0) && isShunNum(arr9) && ((arr.length - 2 - arr0.length == arr9.length) || arr9.length == arr.length - 1); //arr0.length==arr.length-1,[0,1,2,3,4,5,6,7,8,9]的情况
+  arr = arr.sort();
+  if (arr.indexOf(0) != -1 && arr.indexOf(9) != -1) {
+    let arr0 = []; //0这边的数组比如[0,1,2,3,8,9]->[1,2,3]
+    let arr9 = []; //9这边的数组比如[0,1,2,3,7,8,9]->[7,8]
+    //只要arr0和arr9是顺子并且长度总和等于arr.length-2，或者arr9的长度等于arr.length-1那么数组arr就是顺子
+    for (let i = 0; i < arr.length - 2; i++) {
+      let j = i + 1;
+      if (arr[j] - arr[i] == 1) {
+        arr0.push(arr[j]);
+      } else {
+        break;
+      }
     }
-
-    function isShunNum(arr) {
-        return arr.every(function (item, index, arr) {
-            return 0 === index || (Number(item) + 10 - 1) % 10 == arr[index - 1];
-        })
+    for (let i = arr.length - 1; i > -1; i--) {
+      let j = i - 1;
+      if (arr[i] - arr[j] == 1) {
+        arr9.unshift(arr[j]);
+      } else {
+        break;
+      }
     }
+    return isShunNum(arr0) && isShunNum(arr9) && ((arr.length - 2 - arr0.length == arr9.length) || arr9.length == arr.length - 1); //arr0.length==arr.length-1,[0,1,2,3,4,5,6,7,8,9]的情况
+  }
 
-    return isShunNum(arr);
+  function isShunNum(arr) {
+    return arr.every(function (item, index, arr) {
+      return 0 === index || (Number(item) + 10 - 1) % 10 == arr[index - 1];
+    })
+  }
+
+  return isShunNum(arr);
+}
+/*js递归实现方案*/
+function factorial(num) {
+  if (num <= 1) {
+    return 1;
+  } else {
+    return num * factorial(num - 1);
+  }
+}
+
+//组合combination:m个数中取出n个不同数的组合数目，如3个取两个[1,2,3]->[1,2],[1,3],[2,3]
+function combination(m, n) {
+  return m < n ? 0 : factorial(m) / (factorial(n) * factorial(m - n));
+}
+//求两个数字的交集 [1,2,4],[2,3] -> [2]
+function intersection(a, b) {
+  return a.filter(function (n) {
+    return b.indexOf(n) != -1;
+  });
+}
+//求两个元素无重复并集 [1,2,4],[2,3] -> [1,2,3,4]
+function union(a, b) {
+  return (a.concat(b)).filter(function (item, index, self) {
+    return self.indexOf(item) === index;
+  });
+}
+//求a数组相对于b数组的补集 [1,2,4],[2,3] -> [1,4]
+function difference(a, b) {
+  return a.filter(function (item) {
+    return b.indexOf(item) === -1;
+  });
 }
