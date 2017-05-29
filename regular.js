@@ -310,3 +310,9 @@ function validate_allnum(text, value) {
     errorInfo = text + " " + value + " 有误，请输入数字!";
     verifyByReg(value, reg, errorInfo);
 }
+//获取地址栏参数
+function GetQueryString(name) {
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
