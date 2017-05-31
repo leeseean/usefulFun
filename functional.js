@@ -126,6 +126,6 @@ Orange.isEmptyObject = function(obj){
 	if(Object.prototype.toString.call(obj) === '[object Object]'){
 		return JSON.stringify(obj) === "{}";
 	}else{
-		throw new typeError('typeError');
+		throw new TypeError('typeError');
 	}
 }
