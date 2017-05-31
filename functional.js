@@ -121,3 +121,11 @@ Orange.dateFormat = function (date, formatStr) {
     let _date = new Date(date);
     return formatStr.replace(/YYYY/, _date.getFullYear()).replace(/MM/, ('0' + (_date.getMonth() + 1)).slice(-2)).replace(/DD/, ('0' + _date.getDate()).slice(-2)).replace(/hh/, ('0' + _date.getHours()).slice(-2)).replace(/mm/, ('0' + _date.getMinutes()).slice(-2)).replace(/ss/, ('0' + _date.getSeconds()).slice(-2));
 }
+//判断对象是否为空{}
+Orange.isEmptyObject = function(obj){
+	if(Object.prototype.toString.call(obj) === '[object Object]'){
+		return JSON.stringify(obj) === "{}";
+	}else{
+		throw new typeError('typeError');
+	}
+}
