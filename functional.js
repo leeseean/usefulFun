@@ -124,7 +124,10 @@ Orange.dateFormat = function (date, formatStr) {
 //判断对象是否为空{}
 Orange.isEmptyObject = function(obj){
 	if(Object.prototype.toString.call(obj) === '[object Object]'){
-		return JSON.stringify(obj) === "{}";
+		for(let key in obj) {
+			return false;
+		}
+		return true;
 	}else{
 		throw new TypeError('typeError');
 	}
