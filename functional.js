@@ -122,13 +122,17 @@ Orange.dateFormat = function (date, formatStr) {
     return formatStr.replace(/YYYY/, _date.getFullYear()).replace(/MM/, ('0' + (_date.getMonth() + 1)).slice(-2)).replace(/DD/, ('0' + _date.getDate()).slice(-2)).replace(/hh/, ('0' + _date.getHours()).slice(-2)).replace(/mm/, ('0' + _date.getMinutes()).slice(-2)).replace(/ss/, ('0' + _date.getSeconds()).slice(-2));
 }
 //判断对象是否为空{}
-Orange.isEmptyObject = function(obj){
-	if(Object.prototype.toString.call(obj) === '[object Object]'){
-		for(let key in obj) {
-			return false;
-		}
-		return true;
-	}else{
-		throw new TypeError('typeError');
-	}
+Orange.isEmptyObject = function (obj) {
+    if (Object.prototype.toString.call(obj) === '[object Object]') {
+        for (let key in obj) {
+            return false;
+        }
+        return true;
+    } else {
+        throw new TypeError('typeError');
+    }
+}
+//取得两个数之间的随机数字[min,max)
+Orange.randomBetween = function(min, max) {
+    return Math.random() * (max - min) + min;
 }
