@@ -136,3 +136,15 @@ Orange.isEmptyObject = function (obj) {
 Orange.randomBetween = function(min, max) {
     return Math.random() * (max - min) + min;
 }
+Orange.isWindow = function(obj){
+    return obj!=null&&obj===obj.window;
+}
+Orange.trim = function (str,flag) {
+    if(flag=='left'){
+        return str.replace(/^\s+/g,'');
+    }else if(flag=='right'){
+        return str.replace(/\s+$/g,'');
+    }else{
+        return str.replace(/^\s+|\s+$/g,'');
+    }
+}

@@ -64,4 +64,25 @@ Dom = {
         elem.classList.toggle ? elem.classList.toggle(className) : (this.hasClass(elem, className) ? this.removeClass(elem, className) : this.addClass(elem, className));
         return this;
     },
+    siblings(elem){
+        let matched=[];
+        let n = (elem.parentNode || {}).firstChild;
+        for(;n;n= n.nextSibling){
+            if(n.nodeType===1&&n!==elem){
+                matched.push(n);
+            }
+        }
+        return matched;
+    },
+    sibling(cur,dir){//工具函数
+        while((cur=cur[dir])&&cur.nodeType!==1){}
+        return cur;
+    },
+    next(elem){
+        return this.sibling(elem,"nextSibling");
+    },
+    prev(elem){
+        return this.sibling(elem,"previousSibling");
+    }
+
 }
