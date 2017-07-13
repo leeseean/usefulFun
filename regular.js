@@ -317,7 +317,7 @@ function GetQueryString(name) {
     if (r != null) return unescape(r[2]);
     return null;
 }
-//判断是否单标签
+//判断是否纯标签无id，class等属性，也无内容
 function RegSingleTag(str){
     return ( /^<([a-z][^\/\0>:\x20\t\r\n\f]*)[\x20\t\r\n\f]*\/?>(?:<\/\1>|)$/i ).test(str);
 }
