@@ -148,3 +148,6 @@ Orange.trim = function (str,flag) {
         return str.replace(/^\s+|\s+$/g,'');
     }
 }
+function range(num,step){
+    return [...Array(5).keys()].filter(v=>v%step==0);
+}
