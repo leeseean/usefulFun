@@ -788,3 +788,23 @@ function choose(arr, size) {
 
   return allResult;
 }
+//从n组相同数组中各取1个数字组合，组合数字不能相同如3个[1,2,3,4]数组各取1个数字 permutation([1, 2, 3, 4], 3)=>["2,3,4", "1,3,4", "1,2,4", "1,2,3"]
+function permutation (list, n) {
+  var results = []
+
+  function _perm (list, n, res, start) {
+    if (res.length === n) {
+      return results.push(res.join(','))
+    }
+
+    if (start === list.length) { return }
+
+    _perm(list, n, res.slice(), start + 1)
+    res.push(list[start])
+    _perm(list, n, res, start + 1)
+  }
+
+  _perm(list, n, [], 0)
+
+  return results
+}
