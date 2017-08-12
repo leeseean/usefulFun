@@ -743,18 +743,18 @@ function queue(arr, size) {
     return;
   }
   var allResult = [];
-
-  (function (arr, size, result) {
+  function _queue(arr, size, result) {
     if (result.length == size) {
       allResult.push(result);
     } else {
       for (var i = 0, len = arr.length; i < len; i++) {
         var newArr = [].concat(arr),
           curItem = newArr.splice(i, 1);
-        arguments.callee(newArr, size, [].concat(result, curItem));
+        _queue(newArr, size, [].concat(result, curItem));
       }
     }
-  })(arr, size, []);
+  }
+  _queue(arr, size, []);
 
   return allResult;
 }
@@ -762,8 +762,7 @@ function queue(arr, size) {
 //求数组组合的所有组合方式[1,2,3]->[1,2],[1,3],[2,3]
 function choose(arr, size) {
   var allResult = [];
-
-  (function (arr, size, result) {
+  function _choose(arr, size, result) {
     var arrLen = arr.length;
     if (size > arrLen) {
       return;
@@ -780,11 +779,12 @@ function choose(arr, size) {
         } else {
           var newArr = [].concat(arr);
           newArr.splice(0, i + 　1);
-          arguments.callee(newArr, size - 1, newResult);
+          _choose(newArr, size - 1, newResult);
         }
       }
     }
-  })(arr, size, []);
+  }
+  _choose(arr, size, []);
 
   return allResult;
 }
