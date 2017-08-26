@@ -97,6 +97,37 @@ Orange.throttle = function (func, wait, options) {
         return result;
     };
 };
+/**
+ * 分时函数例子
+ * 以创建 WebQQ 列表为例
+ * @param  {[type]}   data     函数执行需要用到的数据
+ * @param  {Function} fn       真正需要分时执行的函数
+ * @param  {[type]}   count    每次创建一批节点的数量
+ * @param  {[type]}   interval 函数执行间隔
+ * @return {[type]}            [description]
+ */
+Orange.timeChunk = function(data, fn, count, interval) {
+    var t;
+  
+    var len = data.length;
+  
+    var start = function() {
+      for (var i = 0; i < Math.min(count || 1, data.length); i++) {
+        var obj = data.shift();
+        fn(obj);
+      }
+    }
+  
+    return function() {
+      t = setInterval(function() {
+        if (data.length === 0) {
+          return clearInterval(t);
+        }
+  
+        start();
+      }, interval);
+    }
+  }
 //range(1,4)->[1,2,3,4]
 Orange.range = function (start, stop, step) {
     if (stop == null) {
