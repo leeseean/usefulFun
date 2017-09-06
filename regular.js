@@ -1,5 +1,5 @@
 //定义两个全局变量
-var reg;
+var reg;  
 var errorInfo;
 //每个验证都需要调用此方法
 function verifyByReg(value, reg, errorInfo) {
