@@ -1,6 +1,6 @@
 /*常用算法函数*/
 /*去重*/
-function delRepeat(arr) {
+export function delRepeat(arr) {
 
   var newArray = new Array();
 
@@ -30,7 +30,7 @@ function delRepeat(arr) {
 
 }
 /*二分法,又称为折半查找算法，但是有缺陷就是要求数字是预先排序好的*/
-function binary(items, value) {
+export function binary(items, value) {
 
   var startIndex = 0,
 
@@ -59,7 +59,7 @@ function binary(items, value) {
 }
 /*十六进制颜色值的随机生成*/
 
-function randomColor() {
+export function randomColor() {
 
   var arrHex = ["0", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d"],
 
@@ -81,7 +81,7 @@ function randomColor() {
 
 /*一个求字符串长度的方法,汉字算两个字符*/
 
-function GetBytes(str) {
+export function GetBytes(str) {
 
   var len = str.length,
 
@@ -103,7 +103,7 @@ function GetBytes(str) {
 
 /*插入排序，所谓的插入排序，就是将序列中的第一个元素看成一个有序的子序列，然后不段向后比较交换比较交换。*/
 
-function insertSort(arr) {
+export function insertSort(arr) {
 
   var key;
 
@@ -132,7 +132,7 @@ function insertSort(arr) {
 
 /*希尔排序，希尔排序，也称递减增量排序算法具体描述，其实说到底也是插入排序的变种*/
 
-function shellSort(array) {
+export function shellSort(array) {
 
   var stepArr = [1750, 701, 301, 132, 57, 23, 10, 4, 1]; // reverse()在维基上看到这个最优的步长较小数组
 
@@ -158,7 +158,7 @@ function shellSort(array) {
 
   // 排序一个步长
 
-  function stepSort(step) {
+  export function stepSort(step) {
 
     //console.log(step) 使用的步长统计
 
@@ -209,11 +209,11 @@ function shellSort(array) {
 这么说可能不是很清晰，直接上代码：*/
 
 
-function sort(arr) {
+export function sort(arr) {
 
   return quickSort(arr, 0, arr.length - 1);
 
-  function quickSort(arr, l, r) {
+  export function quickSort(arr, l, r) {
 
     if (l < r) {
 
@@ -254,7 +254,7 @@ function sort(arr) {
 
 /*冒泡法*/
 
-function bullSort(array) {
+export function bullSort(array) {
 
   var temp;
 
@@ -285,7 +285,7 @@ function bullSort(array) {
 /*选择法排序*/
 
 
-function selectionSort(data) {
+export function selectionSort(data) {
 
   var i, j, min, temp, count = data.length;
 
@@ -332,7 +332,7 @@ function selectionSort(data) {
 
 */
 
-function heapSort(items) {
+export function heapSort(items) {
 
   items = array2heap(items); //将数组转化为堆
 
@@ -360,7 +360,7 @@ function heapSort(items) {
 
 */
 
-function array2heap(items) {
+export function array2heap(items) {
 
   for (var i = Math.ceil(items.length / 2) - 1; i >= 0; i--)
 
@@ -388,7 +388,7 @@ function array2heap(items) {
 
 */
 
-function moveDown(items, first, last) {
+export function moveDown(items, first, last) {
 
   var largest = 2 * first + 1;
 
@@ -439,7 +439,7 @@ function moveDown(items, first, last) {
 * @return 数据交换后的数组
 
 */
-function swap(items, index1, index2) {
+export function swap(items, index1, index2) {
 
   var tmp = items[index1];
 
@@ -454,7 +454,7 @@ function swap(items, index1, index2) {
 递归形式的算法在形式上较为简洁但实用性较差，与快速排序和堆排序相比，归并排序的最大特点是，它是一种稳定的排序方法。
 
 js实现归并：*/
-function MemeryArray(Arr, n, Brr, m) {
+export function MemeryArray(Arr, n, Brr, m) {
   var i, j, k;
 
   var Crr = new Array();
@@ -487,7 +487,7 @@ function MemeryArray(Arr, n, Brr, m) {
 
 }
 //将有二个有序数列a[first...mid]和a[mid...last]合并。
-function mergearray(Arr, first, mid, last, tempArr) {
+export function mergearray(Arr, first, mid, last, tempArr) {
 
   var i = first,
     j = mid + 1;
@@ -525,7 +525,7 @@ function mergearray(Arr, first, mid, last, tempArr) {
 
 }
 
-function mergesort(Arr, first, last) {
+export function mergesort(Arr, first, last) {
 
   var tempArr = new Array();
 
@@ -550,7 +550,7 @@ function mergesort(Arr, first, last) {
 
 //求两个字符串的相似度,返回差别字符数,Levenshtein Distance算法实现
 
-function Levenshtein_Distance(s, t) {
+export function Levenshtein_Distance(s, t) {
 
   　
   var n = s.length; // length of s
@@ -660,7 +660,7 @@ function Levenshtein_Distance(s, t) {
 
 //求两个字符串的相似度,返回相似度百分比
 
-function Levenshtein_Distance_Percent(s, t) {
+export function Levenshtein_Distance_Percent(s, t) {
 
   　
   var l = s.length > t.length ? s.length : t.length;
@@ -673,7 +673,7 @@ function Levenshtein_Distance_Percent(s, t) {
 
 }
 //顺子号:1,2,3,4,5或者9,0,1,2,3,4或者7,8,9,0,1
-function checkShunzi(arr) {
+export function checkShunzi(arr) {
   arr = arr.sort();
   if (arr.indexOf(0) != -1 && arr.indexOf(9) != -1) {
     let arr0 = []; //0这边的数组比如[0,1,2,3,8,9]->[1,2,3]
@@ -698,7 +698,7 @@ function checkShunzi(arr) {
     return isShunNum(arr0) && isShunNum(arr9) && ((arr.length - 2 - arr0.length == arr9.length) || arr9.length == arr.length - 1); //arr0.length==arr.length-1,[0,1,2,3,4,5,6,7,8,9]的情况
   }
 
-  function isShunNum(arr) {
+  export function isShunNum(arr) {
     return arr.every(function (item, index, arr) {
       return 0 === index || (Number(item) + 10 - 1) % 10 == arr[index - 1];
     })
@@ -707,7 +707,7 @@ function checkShunzi(arr) {
   return isShunNum(arr);
 }
 /*js递归实现方案*/
-function factorial(num) {
+export function factorial(num) {
   if (num <= 1) {
     return 1;
   } else {
@@ -716,34 +716,34 @@ function factorial(num) {
 }
 
 //组合combination:m个数中取出n个不同数的组合数目，如3个取两个[1,2,3]->[1,2],[1,3],[2,3]
-function combination(m, n) {
+export function combination(m, n) {
   return m < n ? 0 : factorial(m) / (factorial(n) * factorial(m - n));
 }
 //求两个数字的交集 [1,2,4],[2,3] -> [2]
-function intersection(a, b) {
+export function intersection(a, b) {
   return a.filter(function (n) {
     return b.indexOf(n) != -1;
   });
 }
 //求两个元素无重复并集 [1,2,4],[2,3] -> [1,2,3,4]
-function union(a, b) {
+export function union(a, b) {
   return (a.concat(b)).filter(function (item, index, self) {
     return self.indexOf(item) === index;
   });
 }
 //求a数组相对于b数组的补集 [1,2,4],[2,3] -> [1,4]
-function difference(a, b) {
+export function difference(a, b) {
   return a.filter(function (item) {
     return b.indexOf(item) === -1;
   });
 }
 //求数组排列的所有排列方式[1,2,3]->[1,2],[1,3],[2,3],[2,1],[3,1],[3,2]
-function queue(arr, size) {
+export function queue(arr, size) {
   if (size > arr.length) {
     return;
   }
   var allResult = [];
-  function _queue(arr, size, result) {
+  export function _queue(arr, size, result) {
     if (result.length == size) {
       allResult.push(result);
     } else {
@@ -760,9 +760,9 @@ function queue(arr, size) {
 }
 
 //求数组组合的所有组合方式[1,2,3]->[1,2],[1,3],[2,3]
-function choose(arr, size) {
+export function choose(arr, size) {
   var allResult = [];
-  function _choose(arr, size, result) {
+  export function _choose(arr, size, result) {
     var arrLen = arr.length;
     if (size > arrLen) {
       return;
@@ -789,10 +789,10 @@ function choose(arr, size) {
   return allResult;
 }
 //从n组相同数组中各取1个数字组合，组合数字不能相同如3个[1,2,3,4]数组各取1个数字 permutation([1, 2, 3, 4], 3)=>["2,3,4", "1,3,4", "1,2,4", "1,2,3"]
-function permutation (list, n) {
+export function permutation (list, n) {
   var results = []
 
-  function _perm (list, n, res, start) {
+  export function _perm (list, n, res, start) {
     if (res.length === n) {
       return results.push(res.join(','))
     }
@@ -809,7 +809,7 @@ function permutation (list, n) {
   return results
 }
 /* 判断点是否在图形中 */
-function point_in_polygon(point, vs) {
+export function point_in_polygon(point, vs) {
   
   var x = point[0], y = point[1];
   

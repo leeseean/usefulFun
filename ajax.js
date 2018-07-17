@@ -1,4 +1,4 @@
-function Ajax({
+export default function Ajax({
     type = "GET",
     url = "",
     async = true,
