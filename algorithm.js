@@ -690,7 +690,7 @@ export function checkShunzi(arr, min, max) { //思路圆环
 
   function isShunNum(arr) {
     return arr.every(function (item, index, arr) {
-      return 0 === index || (Number(item) + 10 - 1) % 10 == arr[index - 1];
+      return 0 === index || item - 1 === arr[index - 1];
     })
   }
 }
