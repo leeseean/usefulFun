@@ -673,38 +673,26 @@ export function Levenshtein_Distance_Percent(s, t) {
 
 }
 //顺子号:1,2,3,4,5或者9,0,1,2,3,4或者7,8,9,0,1
-export function checkShunzi(arr) {
+export function checkShunzi(arr, min, max) { //思路圆环
   arr = arr.sort();
-  if (arr.indexOf(0) != -1 && arr.indexOf(9) != -1) {
-    let arr0 = []; //0这边的数组比如[0,1,2,3,8,9]->[1,2,3]
-    let arr9 = []; //9这边的数组比如[0,1,2,3,7,8,9]->[7,8]
-    //只要arr0和arr9是顺子并且长度总和等于arr.length-2，或者arr9的长度等于arr.length-1那么数组arr就是顺子
-    for (let i = 0; i < arr.length - 2; i++) {
-      let j = i + 1;
-      if (arr[j] - arr[i] == 1) {
-        arr0.push(arr[j]);
-      } else {
-        break;
-      }
+  if (isShunNum(arr)) {
+    return true;
+  }
+  //如果不是123456这种,而是9012这种，那么剩余的345678是shunNum，就判断剩余的号码是不是shunNum
+  const restArr = [];
+  for (let i = min; i < max; i++) {
+    if (arr.indexOf(i) === -1) {
+      restArr.push(i);
     }
-    for (let i = arr.length - 1; i > -1; i--) {
-      let j = i - 1;
-      if (arr[i] - arr[j] == 1) {
-        arr9.unshift(arr[j]);
-      } else {
-        break;
-      }
-    }
-    return isShunNum(arr0) && isShunNum(arr9) && ((arr.length - 2 - arr0.length == arr9.length) || arr9.length == arr.length - 1); //arr0.length==arr.length-1,[0,1,2,3,4,5,6,7,8,9]的情况
   }
 
-  export function isShunNum(arr) {
+  return isShunNum(arr);
+
+  function isShunNum(arr) {
     return arr.every(function (item, index, arr) {
       return 0 === index || (Number(item) + 10 - 1) % 10 == arr[index - 1];
     })
   }
-
-  return isShunNum(arr);
 }
 /*js递归实现方案*/
 export function factorial(num) {
@@ -789,15 +777,17 @@ export function choose(arr, size) {
   return allResult;
 }
 //从n组相同数组中各取1个数字组合，组合数字不能相同如3个[1,2,3,4]数组各取1个数字 permutation([1, 2, 3, 4], 3)=>["2,3,4", "1,3,4", "1,2,4", "1,2,3"]
-export function permutation (list, n) {
+export function permutation(list, n) {
   var results = []
 
-  export function _perm (list, n, res, start) {
+  export function _perm(list, n, res, start) {
     if (res.length === n) {
       return results.push(res.join(','))
     }
 
-    if (start === list.length) { return }
+    if (start === list.length) {
+      return
+    }
 
     _perm(list, n, res.slice(), start + 1)
     res.push(list[start])
@@ -810,18 +800,21 @@ export function permutation (list, n) {
 }
 /* 判断点是否在图形中 */
 export function point_in_polygon(point, vs) {
-  
-  var x = point[0], y = point[1];
-  
+
+  var x = point[0],
+    y = point[1];
+
   var inside = false;
   for (var i = 0, j = vs.length - 1; i < vs.length; j = i++) {
-      var xi = vs[i][0], yi = vs[i][1];
-      var xj = vs[j][0], yj = vs[j][1];
-      
-      var intersect = ((yi > y) != (yj > y))
-          && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
-      if (intersect) inside = !inside;
+    var xi = vs[i][0],
+      yi = vs[i][1];
+    var xj = vs[j][0],
+      yj = vs[j][1];
+
+    var intersect = ((yi > y) != (yj > y)) &&
+      (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+    if (intersect) inside = !inside;
   }
-  
+
   return inside;
 }
