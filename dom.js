@@ -119,3 +119,10 @@ export function offsetDis(element) {
   export function getScrollTop() {
     return document.documentElement.scrollTop || document.body.scrollTop;
   }
+
+  //jQuery模拟一个键盘事件
+  export function simulateKeyEvent(selector, keyCode) {
+    const e = jQuery.Event("keyup");//模拟一个键盘事件
+    e.keyCode = keyCode;//keyCode=13是回车
+    $(selector).trigger(e);
+  }
